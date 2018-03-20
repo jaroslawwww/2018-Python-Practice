@@ -26,11 +26,18 @@ class Video:
          - Also assign frames to "self" object
          - Return your results
         '''
-        frames = []
+        
         # 5-1 /5-2 Read video and collect them
+        frames = []
+        while(self.cap.isOpened()):
+            ret, frame = self.cap.read()
+            if ret==True:
+                frames.append(resize(frame, image_h, image_w))
+            else:
+                break
 
-        self.frames = ...  # 5-3 let object have the result
-        return ...  # return your results
+        self.frames = frames  # 5-3 let object have the result
+        return self.frames  # return your results
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.cap.release()
